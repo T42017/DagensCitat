@@ -10,9 +10,25 @@ namespace DagensCitat
     {
         static void Main(string[] args)
         {
-            //Glöm ej att skapa en branch "feature-förnamn" INNAN du gör ändringar i koden :)
-            Console.WriteLine("Hello World");
+            List<string> quotes = new List<string>();
+            for (int i = 0; i < 365; i++)
+            {
+                quotes.Add("Inspirational quote #" + i);
+            }
+
+            int day = DateTime.Today.DayOfYear;
+            string quoteToSay;
+
+            while(day > quotes.Count)
+            {
+                day -= quotes.Count;
+            }
+   
+            quoteToSay = quotes[day];
+                   
+            Console.WriteLine(quoteToSay);
             Console.ReadKey();
+
         }
     }
 }
