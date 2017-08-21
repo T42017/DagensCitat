@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+   
 
 namespace DagensCitat
 {
@@ -11,22 +13,24 @@ namespace DagensCitat
         static void Main(string[] args)
         {
             List<string> quotes = new List<string>();
-            for (int i = 0; i < 365; i++)
+
+            string path = @"C:\Git\DagensCitat-Uppgift\DagensCitat\DagensCitat\DagensCitat\Citat.txt";
+            using (FileStream fs = new FileStream(path, FileMode.Open))
             {
-                quotes.Add("Inspirational quote #" + i);
+                using (StreamReader sr = new StreamReader(fs))
+                {
+
+                    while (sr.Peek() >= 0)
+                    {
+                        quotes.Add(sr.ReadLine());
+                    }
+                }
             }
 
-            int day = DateTime.Today.DayOfYear;
-            string quoteToSay;
-
-            while(day > quotes.Count)
-            {
-                day -= quotes.Count;
-            }
-   
-            quoteToSay = quotes[day];
-                   
-            Console.WriteLine(quoteToSay);
+            int day = DateTime.Today.DayOfYear;            
+            int quoteIndex = day % quotes.Count; 
+            
+            Console.WriteLine(quotes[quoteIndex]);
             Console.ReadKey();
 
         }
