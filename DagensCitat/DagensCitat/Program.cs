@@ -10,7 +10,7 @@ namespace DagensCitat
     {
         static void Main(string[] args)
         {
-            //Glöm ej att skapa en branch "feature-förnamn" INNAN du gör ändringar i koden :)
+            
         }
     }
 }
