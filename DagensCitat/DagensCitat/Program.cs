@@ -11,15 +11,15 @@ namespace DagensCitat
     {
         static void Main(string[] args)
         {
-            List<string> citatLista = System.IO.File.ReadLines(@"C:\GIT\DagensCitat\DagensCitat\DagensCitat\citatLista.Txt").ToList();
-            
+            List<string> citatLista = System.IO.File.ReadLines(@"citatLista.txt").ToList();
+
             int dayOfYear = int.Parse(DateTime.Today.DayOfYear.ToString());
-            int quoteFromList = dayOfYear % 8;
+            int amountOfQuotes = citatLista.Count;
+            int quoteFromList = dayOfYear % amountOfQuotes;
 
             Console.WriteLine(citatLista[quoteFromList]);
 
             Console.ReadLine();
-
         }
     }
 }
