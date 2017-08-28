@@ -12,15 +12,21 @@ namespace DagensCitat
     class Program
     {
         private static readonly string _filePath = Path.Combine(Environment.CurrentDirectory, @"..\..", @"Resources\quotes.txt");
-        private static DelayableQueue<string> _quotes = new DelayableQueue<string>(File.ReadAllLines(_filePath));
-        private static TimeSpan _timeOfDayToStart = TimeSpan.Parse("13:56");
-        private static TimeSpan _timeOfDayToEnd = TimeSpan.Parse("13:58");
+        private static readonly Queue<string> _quotes = new Queue<string>(File.ReadAllLines((_filePath)));
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
+            var date = DateTime.Now.Date;
+
             while (true)
             {
-                var quote = _quotes.DequeueAndEnqueueWithDelay(TimeSpan.FromMilliseconds(250));
+                var today = DateTime.Now.Date;
+                if (today <= date) continue;
+
+                Console.Clear();
+                date = DateTime.Now.Date;
+                var quote = _quotes.Dequeue();
+                _quotes.Enqueue(quote);
                 Console.WriteLine(quote);
             }
         }
